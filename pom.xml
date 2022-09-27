@@ -47,6 +47,13 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.13.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
         <!-- also this dependency is needed to be able to connect to H2 console -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

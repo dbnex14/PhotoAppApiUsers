@@ -6,9 +6,13 @@ import io.dino.learning.photoappapiusers.shared.UserDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
@@ -38,5 +42,29 @@ public class UserServiceImpl implements UserService {
 
         UserDto persistedDto = modelMapper.map(userEntity, UserDto.class);
         return persistedDto;
+    }
+
+    @Override
+    public UserDto getUserDetailsByEmail(String email) {
+        UserEntity userEntity = usersRepository.findByEmail(email); // we use email as username in this project
+
+        if (userEntity == null) throw new UsernameNotFoundException(email);
+        return new ModelMapper().map(userEntity, UserDto.class);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity userEntity = usersRepository.findByEmail(username); // we use email as username in this project
+
+        if (userEntity == null) throw new UsernameNotFoundException(username);
+
+        return new User(
+                userEntity.getEmail()
+                , userEntity.getEncryptedPassword()
+                , true // is account enabled or not (if set to false, email verification functionality will not allow login in until verified)
+                , true
+                , true
+                , true
+                , new ArrayList<>());
     }
 }
