@@ -42,11 +42,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
+        String loginEndPoint = environment.getProperty("login.url.path");
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(userService, environment, authenticationManager());
         // By default, spring security process login via default url "/login".  But since we are using
         // API gateway to establish connection, our url looks like http://localhost:<port>/users-ws/login.
         // Hence, we customize it here to be /users/login or /users/auth or whatever we want.
-        authenticationFilter.setFilterProcessesUrl(environment.getProperty("login.url.path"));
+        authenticationFilter.setFilterProcessesUrl(loginEndPoint);
         return authenticationFilter;
     }
 }
