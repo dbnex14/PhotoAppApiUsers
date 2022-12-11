@@ -27,13 +27,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        String gatewayIp = environment.getProperty("gateway.ip");
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/**")
-                .hasIpAddress(environment.getProperty("gateway.ip"))
+                .hasIpAddress(gatewayIp)
                 .and()
                 .addFilter(getAuthenticationFilter());
         // Once we add spring security, we have to disable frameOptions else we will get
-        // blank page when going to H2 console
+        // blank page when going to H2 console.  NOTE!  Never leave this uncommented and push to repo,
+        // as this opens possibility of ClickJacking.
         http.headers().frameOptions().disable();
     }
 
