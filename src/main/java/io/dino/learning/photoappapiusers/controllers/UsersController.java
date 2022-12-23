@@ -47,4 +47,13 @@ public class UsersController {
         UserResponseModel response = modelMapper.map(persistedUserDto, UserResponseModel.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @GetMapping(value = "/{userId}",
+        produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId) {
+        UserDto userDto = userService.getUserByUserId(userId);
+        UserResponseModel returnValue = new ModelMapper().map(userDto, UserResponseModel.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+    }
 }
