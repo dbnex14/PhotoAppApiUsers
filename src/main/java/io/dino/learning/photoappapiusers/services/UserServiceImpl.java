@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     Environment environment;
 
     @Autowired
-    public UserServiceImpl(UsersRepository usersRepository, BCryptPasswordEncoder encoder, AlbumsServiceClient albumsServiceClient, Environment environment) {
+    public UserServiceImpl(UsersRepository usersRepository, BCryptPasswordEncoder encoder, /*RestTemplate restTemplate,*/ AlbumsServiceClient albumsServiceClient, Environment environment) {
         this.usersRepository = usersRepository;
         this.encoder = encoder;
         //this.restTemplate = restTemplate;
@@ -74,20 +74,17 @@ public class UserServiceImpl implements UserService {
         // this microservices.  "albums-ws" is the name under which this microservice is registered in Eureka Discovery Service
         //URI albumsUri = URI.create(String.format(environment.getProperty("albums.url"), userId));
 
-        /* // Using RestTemplate
+         // Using RestTemplate
         String albumsUri = String.format(environment.getProperty("albums.url"), userId);
-        ResponseEntity<List<AlbumResponseModel>> albumsListResponse = restTemplate.exchange(
-                albumsUri // url to Albums microservice
-                , HttpMethod.GET // HTTP method used to send this request
-                , null // Http entity like headers, request body...
-                , new ParameterizedTypeReference<List<AlbumResponseModel>>() {}  // response type
-        );
+        /*ResponseEntity<List<AlbumResponseModel>> albumsListResponse = restTemplate.exchange(albumsUri, HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {});
         List<AlbumResponseModel> albumsList = albumsListResponse.getBody();*/
 
         // Using Feign client
         List<AlbumResponseModel> albumsList = null;
 //        try {
-             albumsList = albumsServiceClient.getAlbums(userId); //Feign
+                logger.info("Before calling AlbumsServiceClient.getAlbums()");
+                albumsList = albumsServiceClient.getAlbums(userId); //Feign
+                logger.info("After calling AlbumsServiceClient.getAlbums()");
 //        } catch(FeignException e) {
 //            logger.error(e.getLocalizedMessage());
 //        }

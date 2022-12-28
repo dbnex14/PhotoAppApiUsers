@@ -4,6 +4,7 @@ import io.dino.learning.photoappapiusers.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,9 +31,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         String gatewayIp = environment.getProperty("gateway.ip");
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/**")
-                .hasIpAddress(gatewayIp)
+                .antMatchers("/h2-console/**").hasIpAddress(gatewayIp)
+                .antMatchers(HttpMethod.GET, "/actuator/health").hasIpAddress(gatewayIp)
+                .antMatchers(HttpMethod.GET, "/actuator/circuitbreakerevents").hasIpAddress(gatewayIp)
+                .antMatchers("/**").hasIpAddress(gatewayIp)
                 .and()
                 .addFilter(getAuthenticationFilter());
         // Once we add spring security, we have to disable frameOptions else we will get

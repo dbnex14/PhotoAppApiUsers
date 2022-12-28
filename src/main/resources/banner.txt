@@ -1,0 +1,14 @@
+${AnsiBackground.BRIGHT_YELLOW}                                                                                                                   ${AnsiBackground.DEFAULT}
+${AnsiBackground.BRIGHT_YELLOW}   ██╗  ██╗███████╗██╗     ██╗      ██████╗     ██████╗ ███████╗ ██████╗███████╗       █████╗ ██████╗ ██╗    ██╗   ${AnsiBackground.DEFAULT}
+${AnsiBackground.BRIGHT_YELLOW}   ██║  ██║██╔════╝██║     ██║     ██╔═══██╗    ██╔══██╗██╔════╝██╔════╝██╔════╝      ██╔══██╗██╔══██╗██║    ██║   ${AnsiBackground.DEFAULT}
+${AnsiBackground.BRIGHT_YELLOW}   ███████║█████╗  ██║     ██║     ██║   ██║    ██║  ██║███████╗██║     ███████╗█████╗███████║██████╔╝██║    ██║   ${AnsiBackground.DEFAULT}
+${AnsiBackground.BRIGHT_YELLOW}   ██╔══██║██╔══╝  ██║     ██║     ██║   ██║    ██║  ██║╚════██║██║     ╚════██║╚════╝██╔══██║██╔═══╝ ██║    ╚═╝   ${AnsiBackground.DEFAULT}
+${AnsiBackground.BRIGHT_YELLOW}   ██║  ██║███████╗███████╗███████╗╚██████╔╝    ██████╔╝███████║╚██████╗███████║      ██║  ██║██║     ██║    ██╗   ${AnsiBackground.DEFAULT}
+${AnsiBackground.BRIGHT_YELLOW}   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝     ╚═════╝ ╚══════╝ ╚═════╝╚══════╝      ╚═╝  ╚═╝╚═╝     ╚═╝    ╚═╝   ${AnsiBackground.DEFAULT}
+${AnsiBackground.BRIGHT_YELLOW}                           010D0100 010I0011 010N0011 010O0011  01000001 01010000 01001001                         ${AnsiBackground.DEFAULT}
+
+
+
+${AnsiColor.GREEN}Application:${AnsiColor.DEFAULT}          ${AnsiBackground.BRIGHT_GREEN}   ${application.title}  ${AnsiBackground.DEFAULT}
+Version:             ${application.formatted-version}
+${AnsiColor.RED}Spring Boot Version:${AnsiColor.DEFAULT}  ${AnsiBackground.BRIGHT_RED}  ${spring-boot.formatted-version}  ${AnsiBackground.DEFAULT}
