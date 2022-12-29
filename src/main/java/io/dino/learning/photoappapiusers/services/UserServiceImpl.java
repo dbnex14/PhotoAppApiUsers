@@ -21,7 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.ws.rs.HttpMethod;
+import org.springframework.http.HttpMethod;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -74,10 +74,16 @@ public class UserServiceImpl implements UserService {
         // this microservices.  "albums-ws" is the name under which this microservice is registered in Eureka Discovery Service
         //URI albumsUri = URI.create(String.format(environment.getProperty("albums.url"), userId));
 
+        /*
          // Using RestTemplate
         String albumsUri = String.format(environment.getProperty("albums.url"), userId);
-        /*ResponseEntity<List<AlbumResponseModel>> albumsListResponse = restTemplate.exchange(albumsUri, HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {});
-        List<AlbumResponseModel> albumsList = albumsListResponse.getBody();*/
+        ResponseEntity<List<AlbumResponseModel>> albumsListResponse = restTemplate.exchange(
+                albumsUri
+                , HttpMethod.GET
+                , null
+                , new ParameterizedTypeReference<List<AlbumResponseModel>>() {});
+        List<AlbumResponseModel> albumsList = albumsListResponse.getBody();
+        */
 
         // Using Feign client
         List<AlbumResponseModel> albumsList = null;
